@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { Hero } from '../hero';
 import { HeroDetailComponent } from './hero-detail.component';
+import { HeroService } from '../services/hero.service';
 
 @Component({
 	selector: 'hero-list',
@@ -9,25 +10,46 @@ import { HeroDetailComponent } from './hero-detail.component';
 	directives: [HeroDetailComponent]
 })
 
-export class HeroListComponent{
-	public heroes = HEROES;
+export class HeroListComponent implements OnInit{
+	constructor(
+		private heroService : HeroService
+	){}
+	
+	ngOnInit(){
+		this._getHeroes_PromiseType2();
+		this._loadGAPI();
+	}
+	
+	public heroes : Hero[];
 	
 	private _selectedHero : Hero = undefined;
 	
-	private onSelect(hero : Hero) {
+	private _onSelect(hero : Hero) {
 		this._selectedHero = hero;
 	}
+	
+	private _getHeroes_PromiseType1() { //Simulating Ultra Fast Zero-Latency Server
+		this.heroService.getHeroes_PromiseType1()
+						.then((heroes) => { this.heroes = heroes; });
+	}
+	
+	private _getHeroes_PromiseType2() { //Simulating Slower Server 2s delay
+		this.heroService.getHeroes_PromiseType2()
+						.then((heroes) => { this.heroes = heroes; });
+	}
+	
+	private _loadGAPI() { //Loaded Script Successfully -> Also Understood The Concept of promise resolution
+		this.heroService.loadGAPI().then(() => { 
+											try{
+												gapi
+												console.log( gapi );
+											} 
+											catch (ReferenceError) {
+												console.log("gapi is not defined");
+											}
+										})
+									.catch((error : Event) => {
+										console.log(error);
+									});
+	}
 }
-
-var HEROES : Hero[] = [
-	{ "id": 11, "name": "Mr. Nice" },
-	{ "id": 12, "name": "Narco" },
-	{ "id": 13, "name": "Bombasto" },
-	{ "id": 14, "name": "Celeritas" },
-	{ "id": 15, "name": "Magneta" },
-	{ "id": 16, "name": "RubberMan" },
-	{ "id": 17, "name": "Dynama" },
-	{ "id": 18, "name": "Dr IQ" },
-	{ "id": 19, "name": "Magma" },
-	{ "id": 20, "name": "Tornado" }
-]
