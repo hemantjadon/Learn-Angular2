@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { Hero } from './hero';
+import { Hero } from '../hero';
+import { HeroDetailComponent } from './hero-detail.component';
 
 @Component({
-	selector: 'my-app',
-	templateUrl: "app/templates/app.component.html",
-	styleUrls: ['app/styles/app.component.css']
+	selector: 'hero-list',
+	templateUrl: "app/templates/hero-list.component.html",
+	styleUrls: ["app/styles/hero-list.component.css"],
+	directives: [HeroDetailComponent]
 })
 
-export class AppComponent{
-	private _title = "Tour Of Heroes";
-	
+export class HeroListComponent{
 	public heroes = HEROES;
 	
 	private _selectedHero : Hero = undefined;
