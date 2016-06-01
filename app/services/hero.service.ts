@@ -12,7 +12,7 @@ export class HeroService {
 		return new Promise((resolve)=>{
 			setTimeout(()=>{
 				return resolve(HEROES);
-			},2000);
+			},100);
 		});
 	}
 	
@@ -29,6 +29,20 @@ export class HeroService {
 			script.onerror = (error: Event) => { reject(error); };
 			
 			document.head.appendChild(script);
+		});
+	}
+	
+	public getHero(id : number) : Promise<Hero> {
+		return new Promise<Hero>((resolve : Function, reject : Function)=>{
+			let hero : Hero = undefined;
+			
+			for (var i = 0 ; i< HEROES.length; i++) {
+				if (HEROES[i].id === id ) {
+					hero = HEROES[i];
+				}
+			}
+			
+			resolve(hero);
 		});
 	}
 }

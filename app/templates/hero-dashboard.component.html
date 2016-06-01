@@ -1,0 +1,15 @@
+<h3>Top Heroes</h3>
+<div class="grid grid-pad">
+  <div *ngFor="let hero of heroes" (click)="_onSelect(hero)" class="col-1-4">
+    <div class="module hero">
+      <h4>{{hero.name}}</h4>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="_selectedHero">
+  <h2>
+    {{_selectedHero.name | uppercase}} is my hero
+  </h2>
+  <button (click)="_goToDetail(_selectedHero)">View Details</button>
+</div>

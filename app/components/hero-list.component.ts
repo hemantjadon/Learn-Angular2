@@ -7,7 +7,9 @@ import { HeroService } from '../services/hero.service';
 	selector: 'hero-list',
 	templateUrl: "app/templates/hero-list.component.html",
 	styleUrls: ["app/styles/hero-list.component.css"],
-	directives: [HeroDetailComponent]
+	directives: [
+		HeroDetailComponent
+	]
 })
 
 export class HeroListComponent implements OnInit{

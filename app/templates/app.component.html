@@ -1,2 +1,6 @@
 <h1 class="title">{{_title}}</h1>
-<hero-list></hero-list>
+<nav>
+	<a [routerLink]="['Heroes']">Heroes</a>
+	<a [routerLink]="['Dashboard']">Dashboard</a>
+</nav>
+<router-outlet></router-outlet>
