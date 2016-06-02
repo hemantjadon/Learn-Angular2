@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/toPromise';
 import { Hero } from '../hero';
 import { HEROES } from '../mock-heroes';
 
 @Injectable()
 export class HeroService {
+	
+	constructor(
+		private http : Http
+	){}
+	
 	public getHeroes_PromiseType1() : Promise<Hero[]>{
 		return Promise.resolve(HEROES);
 	}
@@ -30,6 +38,13 @@ export class HeroService {
 			
 			document.head.appendChild(script);
 		});
+	}
+	
+	public getHeroes_SERVER() : Promise<Hero[]>{
+		return this.http.get('http://localhost:3304/heroes')
+						.toPromise()
+						.then((response) => {return response.json()})
+						.catch((error : Error) => { console.log( error.message ) });
 	}
 	
 	public getHero(id : number) : Promise<Hero> {

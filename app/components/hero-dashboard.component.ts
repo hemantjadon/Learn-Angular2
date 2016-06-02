@@ -19,7 +19,7 @@ export class HeroDashboardComponent implements OnInit {
 	){}
 	
 	ngOnInit(){
-		this._getHeroes_PromiseType2();
+		this._getHeroes_SERVER();
 	}
 	
 	public heroes : Hero[];
@@ -38,6 +38,10 @@ export class HeroDashboardComponent implements OnInit {
 	private _getHeroes_PromiseType2() { //Simulating Slower Server 2s delay
 		this.heroService.getHeroes_PromiseType2()
 						.then((heroes) => { this.heroes = heroes.slice(1,5); });
+	}
+	
+	private _getHeroes_SERVER() {	//Getting data from JSON-Server
+		this.heroService.getHeroes_SERVER().then((heroes)=>{ this.heroes = heroes.slice(1,5); });
 	}
 	
 	private _goToDetail(hero : Hero) {

@@ -18,7 +18,7 @@ export class HeroListComponent implements OnInit{
 	){}
 	
 	ngOnInit(){
-		this._getHeroes_PromiseType2();
+		this._getHeroes_SERVER();
 		this._loadGAPI();
 	}
 	
@@ -53,5 +53,9 @@ export class HeroListComponent implements OnInit{
 									.catch((error : Event) => {
 										console.log(error);
 									});
+	}
+	
+	public _getHeroes_SERVER() {
+		this.heroService.getHeroes_SERVER().then((heroes) => { this.heroes = heroes });
 	}
 }
